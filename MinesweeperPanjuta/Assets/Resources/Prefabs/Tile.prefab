@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a2db85df70448947a02a763aa865b23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,3 +124,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286eca612c689c641835d3fbdd4df069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMine: 0
+  defaultSprite: {fileID: 21300000, guid: 5a2db85df70448947a02a763aa865b23, type: 3}
+  emptyFieldSprite:
+  - {fileID: 21300000, guid: a3888c2ef35c74145acf33ab4cec88fb, type: 3}
+  - {fileID: 21300000, guid: 655605532e77edb4b89a326e7da27a8f, type: 3}
+  - {fileID: 21300000, guid: f26e0e471c627604f9911d741fa0c710, type: 3}
+  - {fileID: 21300000, guid: 4325af510abef034dabba11719015a88, type: 3}
+  - {fileID: 21300000, guid: ca71250639262894b8009bb6529458f1, type: 3}
+  - {fileID: 21300000, guid: a33d211ed46e9854d98867d7d260848d, type: 3}
+  - {fileID: 21300000, guid: 3bc83a9100736634dbddca622517f5b2, type: 3}
+  - {fileID: 21300000, guid: 29e19209039543c4b8924c05c078e637, type: 3}
+  - {fileID: 21300000, guid: 0589cf8bb84e6ef408f5934ce0fd8ed4, type: 3}
+  mineSprite: {fileID: 21300000, guid: abf949227e6f9f443aeb7eec201f98b5, type: 3}
+  rescuedFieldSprite: {fileID: 21300000, guid: e5e89134c00d9284ba5656ff79ba1149, type: 3}
+  deadlyMineSprite: {fileID: 21300000, guid: da7b577b2b6a7c04594e46be4b843350, type: 3}
+  rescuedMineSprite: {fileID: 21300000, guid: 3c2cb47c8e199ef4fb7885dacd384d3c, type: 3}
+  xCoordinate: 0
+  yCoordinate: 0
+  isRevealed: 0
