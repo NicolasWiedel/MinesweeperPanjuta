@@ -45,6 +45,7 @@ public class MineField : MonoBehaviour
     void Start()
     {
         createTileField(20, 20, 10);
+        GameController.AdjustPositions();
     }
 
     // Update is called once per frame
