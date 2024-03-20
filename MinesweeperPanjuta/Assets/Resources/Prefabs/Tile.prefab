@@ -137,9 +137,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 29e19209039543c4b8924c05c078e637, type: 3}
   - {fileID: 21300000, guid: 0589cf8bb84e6ef408f5934ce0fd8ed4, type: 3}
   mineSprite: {fileID: 21300000, guid: abf949227e6f9f443aeb7eec201f98b5, type: 3}
-  rescuedFieldSprite: {fileID: 21300000, guid: e5e89134c00d9284ba5656ff79ba1149, type: 3}
+  rescuedFieldSprite: {fileID: 21300000, guid: 3c2cb47c8e199ef4fb7885dacd384d3c, type: 3}
   deadlyMineSprite: {fileID: 21300000, guid: da7b577b2b6a7c04594e46be4b843350, type: 3}
-  rescuedMineSprite: {fileID: 21300000, guid: 3c2cb47c8e199ef4fb7885dacd384d3c, type: 3}
+  rescuedMineSprite: {fileID: 21300000, guid: e5e89134c00d9284ba5656ff79ba1149, type: 3}
   xCoordinate: 0
   yCoordinate: 0
   isRevealed: 0

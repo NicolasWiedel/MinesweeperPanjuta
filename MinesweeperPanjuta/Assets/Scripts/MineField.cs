@@ -48,6 +48,109 @@ public class MineField : MonoBehaviour
         GameController.AdjustPositions();
     }
 
+    public void ClickTile(int x, int y)
+    {
+        if (isFirstClick)
+        {
+            CreateMines(x, y);
+        }
+        if(tiles[x, y].isMine)
+        {
+            // TODO: Game Over
+        }
+        else
+        {
+            Reveal(x, y, new bool[xTotal, yTotal]);
+            // TODO: ist Spiel gewonnen
+        }
+    }
+
+    private void CreateMines(int xNot, int yNot)
+    {
+        isFirstClick = false;
+
+        // TODO: starttimer aufrufen
+
+        int minesLeft = amountMines;
+        int fieldCounter = xTotal * yTotal;
+
+        for(int i = 0; i < xTotal; i++)
+        {
+            for(int j = 0; j < yTotal; j++)
+            {
+                if(!(i == xNot && j == yNot))
+                {
+                    Tile tile = tiles[i, j];
+                    float chanceForMine = (float)minesLeft / (float)fieldCounter;
+
+                    if(Random.value <= chanceForMine)
+                    {
+                        tile.isMine = true;
+                        minesLeft--;
+                    }
+                }
+                fieldCounter--;
+            }
+        }
+    }
+
+    private void Reveal(int x, int y, bool[,] isRevealed)
+    {
+        if (x >= 0 && y >= 0 && x < xTotal && y < yTotal)
+        {
+            if(isRevealed[x, y] != true)
+            {
+                isRevealed[x, y] = true;
+
+                int neighbours = CountNeighbours(x, y);
+                tiles[x, y].ChangeSpriteToEmpty(neighbours);
+                
+                if(neighbours == 0)
+                {
+                    Reveal(x, y - 1, isRevealed);
+                    Reveal(x, y + 1, isRevealed);
+
+                    Reveal(x - 1, y - 1, isRevealed);
+                    Reveal(x - 1, y    , isRevealed);
+                    Reveal(x - 1, y + 1, isRevealed);
+
+                    Reveal(x + 1, y - 1, isRevealed);
+                    Reveal(x + 1, y    , isRevealed);
+                    Reveal(x + 1, y + 1, isRevealed);
+                }
+            }
+        }
+    }
+
+    private int CountNeighbours(int x, int y)
+    {
+        int neighbours = 0;
+        if (HasMine(x, y - 1)) neighbours++;
+        if (HasMine(x, y + 1)) neighbours++;
+
+        if (HasMine(x - 1, y - 1)) neighbours++;
+        if (HasMine(x - 1, y    )) neighbours++;
+        if (HasMine(x - 1, y + 1)) neighbours++;
+
+        if (HasMine(x + 1, y - 1)) neighbours++;
+        if (HasMine(x + 1, y    )) neighbours++;
+        if (HasMine(x + 1, y + 1)) neighbours++;
+
+        return neighbours;
+    }
+
+    private bool HasMine(int x, int y)
+    {
+        if(x >= 0 && y >= 0 && x < xTotal && y < yTotal)
+        {
+            return tiles[x, y].isMine;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

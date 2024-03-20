@@ -78,7 +78,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        // TODO: GameController funktionatity 
+        GameController.mineField.ClickTile(xCoordinate, yCoordinate); 
     }
 
     private void OnMouseOver()
