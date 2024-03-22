@@ -28,6 +28,8 @@ public class MineField : MonoBehaviour
                 tiles[i, j] = GetNewTile(i, j);
             }
         }
+
+        GameController.UpdateMinesLeft(mines);
     }
 
     private Tile GetNewTile(int x, int y)
@@ -44,8 +46,8 @@ public class MineField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        createTileField(20, 20, 10);
-        GameController.AdjustPositions();
+        //createTileField(20, 20, 10);
+        //GameController.AdjustPositions();
     }
 
     public void ClickTile(int x, int y)
@@ -56,12 +58,17 @@ public class MineField : MonoBehaviour
         }
         if(tiles[x, y].isMine)
         {
-            // TODO: Game Over
+            LooseGame(x, y);
         }
         else
         {
             Reveal(x, y, new bool[xTotal, yTotal]);
-            // TODO: ist Spiel gewonnen
+
+            if (IsGameWon())
+            {
+                WinGame();
+                Debug.Log("Spiel ist gewonnen!");
+            }
         }
     }
 
@@ -69,7 +76,7 @@ public class MineField : MonoBehaviour
     {
         isFirstClick = false;
 
-        // TODO: starttimer aufrufen
+        GameController.StartTimer();
 
         int minesLeft = amountMines;
         int fieldCounter = xTotal * yTotal;
@@ -155,5 +162,91 @@ public class MineField : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ResetMinefield()
+    {
+        transform.position = new Vector2(0, 0);
+
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Tile");
+        foreach(GameObject gameObject in gameObjects)
+        {
+            Destroy(gameObject);
+        }
+        if(GameController.difficulty == "easy")
+        {
+            createTileField(13, 13, 20);
+        }
+        else if(GameController.difficulty == "medium")
+        {
+            createTileField(15, 15, 45);
+        }
+        else if(GameController.difficulty == "hard")
+        {
+            createTileField(31, 21, 120);
+        }
+        GameController.ResetTimer();
+        GameController.AdjustPositions();
+
+        // TODO; Smilee ändern
+    }
+
+    public bool IsGameWon()
+    {
+        int tilesLeft = 0;
+        
+        foreach(Tile tile in tiles)
+        {
+            if (!tile.isRevealed)
+            {
+                tilesLeft++;
+            }
+        }
+
+        if (tilesLeft == amountMines)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void WinGame()
+    {
+        foreach(Tile tile in tiles)
+        {
+            if (tile.isMine)
+            {
+                tile.ChangeSpriteToMine();
+            }
+        }
+
+        //TODO: HappyButton
+        GameController.StopTimer();
+        //TODO: Score updaten
+    }
+
+    public void LooseGame(int x, int y)
+    {
+        tiles[x, y].ChangeSpriteToDeadlyMine();
+
+        foreach(Tile tile in tiles)
+        {
+            BoxCollider2D collider = tile.GetComponent<BoxCollider2D>();
+            collider.enabled = false;
+
+            if (tile.isMine)
+            {
+                if(!(tile.xCoordinate == x && tile.yCoordinate == y))
+                {
+                    tile.ChangeSpriteToMine();
+                }
+            }
+        }
+
+        //TODO: unhappy
+        GameController.StopTimer();
     }
 }

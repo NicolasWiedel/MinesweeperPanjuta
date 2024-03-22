@@ -21,7 +21,8 @@ public class Tile : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        
+        isRevealed = false;
+        ChangeSpriteToDefault();
     }
 
     public void ChangeSpriteToDefault()
@@ -34,6 +35,7 @@ public class Tile : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().sprite = emptyFieldSprite[i];
         GetComponent<BoxCollider2D>().enabled = false;
+        isRevealed = true;
     }
 
     public void ChangeSpriteToMine()
@@ -51,7 +53,7 @@ public class Tile : MonoBehaviour
     public void ChangeSpriteToRescuedMine()
     {
         GetComponent<SpriteRenderer>().sprite = rescuedMineSprite;
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public void ToggleRescuedSprite()
@@ -59,12 +61,12 @@ public class Tile : MonoBehaviour
         if(GetComponent<SpriteRenderer>().sprite == defaultSprite) 
         {
             ChangeSpriteToRescuedMine();
-            // TODO: Reduce amount of mines
+            GameController.DecreaseMinesLeft();
         }
-        else if(GetComponent<SpriteRenderer>().sprite == rescuedFieldSprite)
+        else if(GetComponent<SpriteRenderer>().sprite == rescuedMineSprite)
         {
             ChangeSpriteToDefault();
-            // TODO; increase amount of mines
+            GameController.IncreaseMinesLeft();
         }
     }
 
