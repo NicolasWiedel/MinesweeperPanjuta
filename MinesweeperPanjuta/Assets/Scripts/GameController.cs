@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
         go = GameObject.Find("_Scripts");
         buttonController = go.GetComponent <ButtonController>();
 
-        difficulty = "hard";
+        difficulty = "easy";
         ShowCurrentHighscore();
         mineField.ResetMinefield();
 

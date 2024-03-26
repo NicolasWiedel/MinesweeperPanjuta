@@ -188,7 +188,7 @@ public class MineField : MonoBehaviour
         GameController.ResetTimer();
         GameController.AdjustPositions();
 
-        // TODO; Smilee ändern
+        GameController.buttonController.ChangeToNeutral();
     }
 
     public bool IsGameWon()
@@ -223,9 +223,9 @@ public class MineField : MonoBehaviour
             }
         }
 
-        //TODO: HappyButton
+        GameController.buttonController.ChangeToHappy();
         GameController.StopTimer();
-        //TODO: Score updaten
+        GameController.UpdateHighscore();
     }
 
     public void LooseGame(int x, int y)
@@ -246,7 +246,7 @@ public class MineField : MonoBehaviour
             }
         }
 
-        //TODO: unhappy
+        GameController.buttonController.ChangeToUnHappy();
         GameController.StopTimer();
     }
 }
